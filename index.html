@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bazaar Entre Particuliers - Accueil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+        
+        .welcome-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #198754;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #198754;
+        }
+        
+        .logo i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .logo h1 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .conditions {
+            background-color: #f1f8f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #198754;
+            text-align: justify;
+            text-justify: inter-word;
+            min-height: 200px;
+        }
+        
+        .btn-accept {
+            background-color: #198754;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .btn-accept:hover {
+            background-color: #145c3b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 15px 0;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+            z-index: 1000;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .contact-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .contact-icons a {
+            color: #198754;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .contact-icons a:hover {
+            color: #145c3b;
+            transform: scale(1.2);
+        }
+        
+        .language-selector {
+            margin-bottom: 20px;
+            text-align: center;
+            white-space: nowrap; /* Empêche le retour à la ligne */
+            overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
+            padding-bottom: 5px; /* Espace pour la scrollbar */
+        }
+        
+        .language-btn {
+            background: none;
+            border: 1px solid #198754;
+            color: #198754;
+            padding: 5px 15px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block; /* Affiche les boutons en ligne */
+            min-width: 80px; /* Largeur minimale pour uniformité */
+        }
+        
+        .language-btn.active {
+            background-color: #198754;
+            color: white;
+        }
+        
+        .language-btn:hover:not(.active) {
+            background-color: #e9f5ee;
+        }
+        
+        .rtl-text {
+            direction: rtl;
+            text-align: justify; /* Texte justifié en arabe */
+            text-justify: inter-word;
+        }
+        
+        /* Style pour la scrollbar des boutons de langue */
+        .language-selector::-webkit-scrollbar {
+            height: 5px;
+        }
+        
+        .language-selector::-webkit-scrollbar-thumb {
+            background: #198754;
+            border-radius: 10px;
+        }
+        
+        .language-selector::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        @media (max-width: 768px) {
+            .welcome-container {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .logo i {
+                font-size: 2.5rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .conditions {
+                padding: 15px;
+                font-size: 0.95rem;
+                min-height: 250px;
+            }
+            
+            .btn-accept {
+                width: 100%;
+                padding: 12px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            body {
+                padding-bottom: 120px;
+            }
+            
+            .language-btn {
+                padding: 5px 10px;
+                margin: 0 3px;
+                min-width: 70px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-container">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <h1>Market Entre Particuliers</h1>
+                <p>Votre marché local en ligne</p>
+            </div>
+            
+            <div class="language-selector">
+                <button class="language-btn active" data-lang="fr">Français</button>
+                <button class="language-btn" data-lang="ar">العربية</button>
+                <button class="language-btn" data-lang="en">English</button>
+            </div>
+            
+            <div class="conditions">
+                <div id="fr-text">
+                    <p>Bienvenue sur notre market entre particuliers, un espace pensé pour faciliter vos échanges en toute simplicité et confiance. Nous souhaitons rappeler que notre plateforme est uniquement un intermédiaire : nous ne participons à aucune transaction et n'exerçons aucun contrôle sur les articles proposés ou la fiabilité des utilisateurs. Chaque acheteur et vendeur est responsable de ses propres échanges et doit agir avec honnêteté, respect et vigilance. Votre expérience compte pour nous, alors prenez soin de vous et de vos interlocuteurs.</p>
+                    
+                    <p><em>En cliquant sur « J'accepte », vous validez ces principes et conditions d'utilisation.</em></p>
+                </div>
+                
+                <div id="ar-text" class="rtl-text" style="display: none;">
+                    <p>مرحباً بكم في الماركت الخاص بين الأفراد، مساحة مصممة لتسهيل تبادلاتكم بكل بساطة وثقة. نود أن نذكركم أن منصتنا هي وسيط فقط: نحن لا نشارك في أي معاملة ولا نمارس أي سيطرة على العناصر المعروضة أو موثوقية المستخدمين. كل مشتري وبائع مسؤول عن تبادلاته الخاصة ويجب أن يتصرف بأمانة واحترام ويقظة. تجربتك مهمة بالنسبة لنا، لذا اعتن بنفسك وبمحاوريك.</p>
+                    
+                    <p><em>بالنقر على "أوافق"، فإنك توافق على هذه المبادئ وشروط الاستخدام.</em></p>
+                </div>
+                
+                <div id="en-text" style="display: none;">
+                    <p>Welcome to our market between individuals, a space designed to facilitate your exchanges with simplicity and trust. We would like to remind you that our platform is only an intermediary: we do not participate in any transactions and do not exercise any control over the items offered or the reliability of users. Each buyer and seller is responsible for their own exchanges and must act with honesty, respect and vigilance. Your experience matters to us, so take care of yourself and your interlocutors.</p>
+                    
+                    <p><em>By clicking "I accept", you validate these principles and terms of use.</em></p>
+                </div>
+            </div>
+            
+            <a href="market.html" class="btn btn-accept">
+                <i class="fas fa-check-circle"></i> <span class="accept-text">J'accepte</span>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <span>Site géré par M.Seddik Elidrissi</span>
+            <div class="contact-icons">
+                <a href="https://wa.me/212608975435" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="sms:+212608975435" title="Envoyer un SMS"><i class="fas fa-sms"></i></a>
+                <a href="tel:+212608975435" title="Appeler"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageButtons = document.querySelectorAll('.language-btn');
+            const textElements = {
+                fr: document.getElementById('fr-text'),
+                ar: document.getElementById('ar-text'),
+                en: document.getElementById('en-text')
+            };
+            const acceptButtonText = document.querySelector('.accept-text');
+            
+            const acceptButtonTexts = {
+                fr: "J'accepte",
+                ar: "أوافق",
+                en: "I accept"
+            };
+            
+            languageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    languageButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    Object.values(textElements).forEach(el => el.style.display = 'none');
+                    
+                    const lang = this.getAttribute('data-lang');
+                    textElements[lang].style.display = 'block';
+                    
+                    acceptButtonText.textContent = acceptButtonTexts[lang];
+                });
+            });
+        });
+    </script>
+</body>
+</html>
