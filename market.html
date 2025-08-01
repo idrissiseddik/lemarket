@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://kit.fontawesome.com/a2d9a8d2d3.js" crossorigin="anonymous"></script>
   <style>
-    /* [Vos styles CSS existants restent identiques] */
     body {
       background-color: #f8f9fa;
       margin-top: 160px;
@@ -415,7 +414,7 @@
 <footer>
   <span>Site géré par M.Seddik Elidrissi</span>
   <div class="footer-contact">
-    <a href="whatsapp://send?phone=212608975435" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/212608975435" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     <a href="sms:+212608975435" title="Envoyer un SMS"><i class="fas fa-sms"></i></a>
     <a href="tel:+212608975435" title="Appeler"><i class="fas fa-phone"></i></a>
   </div>
@@ -554,7 +553,7 @@
       image: "images/maillot.jpg",
       prix: "150 MAD",
       tel: "+212608975435",
-      whatsapp: "212608975435",
+      whatsapp: "+212608975435",
       categorie: "Vêtements",
       ville: "Marrakech",
       description: "Maillot officiel de l'équipe nationale marocaine, taille L, état neuf avec étiquette."
@@ -564,7 +563,7 @@
       image: "images/001.jpeg",
       prix: "900 MAD",
       tel: "+212614712321",
-      whatsapp: "212614712321",
+      whatsapp: "+212614712321",
       categorie: "Meubles",
       ville: "Marrakech",
       description: "مكتب نقي للبيع ثمن جد مناسب."
@@ -574,7 +573,7 @@
       image: "images/002.jpeg",
       prix: "800 MAD",
       tel: "+212617406062",
-      whatsapp: "212617406062",
+      whatsapp: "+212617406062",
       categorie: "Autres",
       ville: "Marrakech",
       description: "بتوين نمرة 20 مليحة"
@@ -584,7 +583,7 @@
       image: "https://via.placeholder.com/400x300?text=Samsung+A12",
       prix: "1000 MAD",
       tel: "+212608975435",
-      whatsapp: "212608975435",
+      whatsapp: "+212608975435",
       categorie: "Électronique",
       ville: "Rabat",
       description: "Smartphone Samsung Galaxy A12, 64GB, double SIM, batterie 5000mAh. Livré avec coque et protecteur d'écran."
@@ -594,7 +593,7 @@
       image: "https://via.placeholder.com/400x300?text=Bureau+Occasion",
       prix: "500 MAD",
       tel: "+212608975435",
-      whatsapp: "212608975435",
+      whatsapp: "+212608975435",
       categorie: "Meubles",
       ville: "Marrakech",
       description: "Bureau en bois avec tiroirs, dimensions 120x60x75cm. Quelques marques d'usage mais très fonctionnel."
@@ -604,7 +603,7 @@
       image: "https://via.placeholder.com/400x300?text=Veste+Cuir",
       prix: "350 MAD",
       tel: "+212608975435",
-      whatsapp: "212608975435",
+      whatsapp: "+212608975435",
       categorie: "Vêtements",
       ville: "Fès",
       description: "Veste en cuir véritable, taille M, couleur marron. Portée seulement quelques fois, comme neuve."
@@ -614,7 +613,7 @@
       image: "https://via.placeholder.com/400x300?text=PC+Portable",
       prix: "2500 MAD",
       tel: "+212608975435",
-      whatsapp: "212608975435",
+      whatsapp: "+212608975435",
       categorie: "Électronique",
       ville: "Tanger",
       description: "PC portable HP, processeur i5, 8GB RAM, 256GB SSD, écran 15.6 pouces. Garantie 3 mois."
@@ -624,7 +623,7 @@
       image: "https://via.placeholder.com/400x300?text=Vélo+Course",
       prix: "1200 MAD",
       tel: "+212608975435",
-      whatsapp: "212608975435",
+      whatsapp: "+212608975435",
       categorie: "Autres",
       ville: "Autres",
       description: "Vélo de course homme, cadre alu, 21 vitesses, freins à disque. Révision récente, pneus neufs."
@@ -632,22 +631,6 @@
   ];
 
   const container = document.getElementById("product-list");
-
-  // Fonction pour ouvrir WhatsApp avec fallback
-  function openWhatsApp(phone, message) {
-    const appUrl = `whatsapp://send?phone=${phone}&text=${message}`;
-    const webUrl = `https://wa.me/${phone}?text=${message}`;
-    
-    // Essayer d'ouvrir l'application
-    window.location.href = appUrl;
-    
-    // Fallback après un délai si l'application ne s'ouvre pas
-    setTimeout(function() {
-      if (!document.hidden) {
-        window.location.href = webUrl;
-      }
-    }, 1000);
-  }
 
   function afficherProduits(filtres = {}) {
     container.innerHTML = "";
@@ -660,6 +643,7 @@
 
     produitsFiltres.forEach(p => {
       const message = encodeURIComponent(`Bonjour, je suis intéressé par votre article : ${p.nom} à ${p.prix}`);
+      const whatsappLink = `https://wa.me/${p.whatsapp}?text=${message}`;
       const telLink = `tel:${p.tel}`;
 
       container.innerHTML += `
@@ -680,7 +664,7 @@
                 <a href="${telLink}" class="btn btn-outline-success me-2 btn-call" title="Appeler le vendeur">
                   <i class="fas fa-phone"></i> Appeler
                 </a>
-                <a onclick="openWhatsApp('${p.whatsapp}', '${message}')" class="btn btn-success btn-whatsapp" title="Contacter sur WhatsApp">
+                <a href="${whatsappLink}" target="_blank" class="btn btn-success btn-whatsapp" title="Contacter sur WhatsApp">
                   <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
               </div>
@@ -783,6 +767,7 @@
 *Catégorie:* ${categorie}`;
 
     const whatsappAdmin = '212608975435';
+    const lienAdmin = `https://wa.me/${whatsappAdmin}?text=${messageAdmin}`;
 
     // Message de confirmation pour l'utilisateur
     let messageConfirmation = `✅ *Votre annonce a été envoyée avec succès !*%0A%0A
@@ -801,13 +786,15 @@
 📞 *Contact admin:* +212608975435 (si vous avez des questions)%0A%0A
 Merci pour votre confiance ! 🙏`;
 
-    // Envoyer d'abord à l'admin
-    openWhatsApp(whatsappAdmin, messageAdmin);
+    const lienConfirmation = `https://wa.me/+212${tel}?text=${messageConfirmation}`;
+
+    // Ouvrir le lien WhatsApp pour l'admin
+    window.open(lienAdmin, '_blank');
     
-    // Puis envoyer la confirmation à l'utilisateur
+    // Envoyer la confirmation à l'utilisateur après un court délai
     setTimeout(() => {
-      openWhatsApp(`212${tel}`, messageConfirmation);
-    }, 1500);
+      window.open(lienConfirmation, '_blank');
+    }, 1000);
 
     // Réinitialiser le formulaire
     document.getElementById('formProduit').reset();
