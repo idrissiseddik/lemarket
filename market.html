@@ -757,6 +757,7 @@
     const img = document.getElementById('imgProduit').value;
     const hasImage = img && img.trim() !== '';
 
+    // Message pour l'admin
     const messageAdmin = `Salam, voici une annonce à publier sur le site :%0A
 *Nom:* ${nom}%0A
 *Prix:* ${prix} MAD%0A
@@ -769,32 +770,28 @@
     const whatsappAdmin = '212608975435';
     const lienAdmin = `https://wa.me/${whatsappAdmin}?text=${messageAdmin}`;
 
-    // Message de confirmation pour l'utilisateur
-    let messageConfirmation = `✅ *Votre annonce a été envoyée avec succès !*%0A%0A
+    // Message automatique pour le vendeur
+    let messageVendeur = `✅ *Confirmation de votre annonce* ✅%0A%0A
 *Détails de votre annonce:*%0A
 📌 *Produit:* ${nom}%0A
 💰 *Prix:* ${prix} MAD%0A
 📍 *Ville:* ${ville}%0A
 🏷️ *Catégorie:* ${categorie}%0A%0A`;
 
-    // Ajouter une mention si la photo n'a pas été fournie
     if (!hasImage) {
-      messageConfirmation += `📸 *Important:* Merci de nous envoyer la photo du produit via WhatsApp pour compléter votre annonce.%0A%0A`;
+      messageVendeur += `📸 *Photo requise:*%0APour compléter votre annonce, merci d'envoyer la photo du produit en réponse à ce message.%0A%0A`;
     }
 
-    messageConfirmation += `🕒 Votre annonce sera publiée après vérification, dans les plus brefs délais.%0A%0A
-📞 *Contact admin:* +212608975435 (si vous avez des questions)%0A%0A
+    messageVendeur += `🕒 Votre annonce sera publiée après vérification.%0A%0A
 Merci pour votre confiance ! 🙏`;
 
-    const lienConfirmation = `https://wa.me/+212${tel}?text=${messageConfirmation}`;
+    const lienVendeur = `https://wa.me/+212${tel}?text=${messageVendeur}`;
 
     // Ouvrir le lien WhatsApp pour l'admin
     window.open(lienAdmin, '_blank');
     
-    // Envoyer la confirmation à l'utilisateur après un court délai
-    setTimeout(() => {
-      window.open(lienConfirmation, '_blank');
-    }, 1000);
+    // Envoyer automatiquement la confirmation au vendeur
+    window.open(lienVendeur, '_blank');
 
     // Réinitialiser le formulaire
     document.getElementById('formProduit').reset();
