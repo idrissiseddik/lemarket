@@ -750,56 +750,35 @@
     // Vérification des champs obligatoires
     if (!nom || !prix || !tel || !ville || !categorie) {
       showAlert('Veuillez remplir tous les champs obligatoires (*)');
-      return;
+      return; // Empêche l'envoi du formulaire
     }
 
     const desc = document.getElementById('descProduit').value;
     const img = document.getElementById('imgProduit').value;
-    const hasImage = img && img.trim() !== '';
 
-    // Message pour l'admin
-    const messageAdmin = `Salam, voici une annonce à publier sur le site :%0A
+    const message = `Salam, voici une annonce à publier sur le site :%0A
 *Nom:* ${nom}%0A
 *Prix:* ${prix} MAD%0A
 *Tél vendeur:* +212${tel}%0A
 *Ville:* ${ville}%0A
 *Description:* ${desc || '---'}%0A
-*Photo:* ${hasImage ? img : 'à envoyer séparément'}%0A
+*Photo:* ${img || 'à envoyer séparément'}%0A
 *Catégorie:* ${categorie}`;
 
     const whatsappAdmin = '212608975435';
-    const lienAdmin = `https://wa.me/${whatsappAdmin}?text=${messageAdmin}`;
+    const lien = `https://wa.me/${whatsappAdmin}?text=${message}`;
 
-    // Message automatique pour le vendeur
-    let messageVendeur = `✅ *Confirmation de votre annonce* ✅%0A%0A
-*Détails de votre annonce:*%0A
-📌 *Produit:* ${nom}%0A
-💰 *Prix:* ${prix} MAD%0A
-📍 *Ville:* ${ville}%0A
-🏷️ *Catégorie:* ${categorie}%0A%0A`;
+    // Ouvrir le lien WhatsApp
+    window.open(lien, '_blank');
 
-    if (!hasImage) {
-      messageVendeur += `📸 *Photo requise:*%0APour compléter votre annonce, merci d'envoyer la photo du produit en réponse à ce message.%0A%0A`;
-    }
-
-    messageVendeur += `🕒 Votre annonce sera publiée après vérification.%0A%0A
-Merci pour votre confiance ! 🙏`;
-
-    const lienVendeur = `https://wa.me/+212${tel}?text=${messageVendeur}`;
-
-    // Ouvrir le lien WhatsApp pour l'admin
-    window.open(lienAdmin, '_blank');
-    
-    // Envoyer automatiquement la confirmation au vendeur
-    window.open(lienVendeur, '_blank');
-
-    // Réinitialiser le formulaire
+    // Réinitialiser les champs du formulaire
     document.getElementById('formProduit').reset();
 
     // Fermer la modale
     const modal = bootstrap.Modal.getInstance(document.getElementById('modalProduit'));
     modal.hide();
 
+    // Afficher une alerte
     showAlert('Votre annonce a été envoyée avec succès');
   });
 
