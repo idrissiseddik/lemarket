@@ -308,6 +308,40 @@
       to { opacity: 0; }
     }
 
+    /* Styles pour le carrousel */
+    .carousel-inner {
+      border-radius: 0;
+      height: 250px;
+    }
+    
+    .carousel-item {
+      height: 100%;
+    }
+    
+    .carousel-item img {
+      object-fit: contain;
+      height: 100%;
+      width: 100%;
+      background-color: #f1f1f1;
+    }
+    
+    .carousel-control-prev, 
+    .carousel-control-next {
+      width: 8%;
+      background-color: rgba(0,0,0,0.2);
+    }
+    
+    .carousel-indicators {
+      margin-bottom: 0;
+    }
+    
+    .carousel-indicators button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 3px;
+    }
+
     @media (max-width: 767px) {
       header h1 {
         font-size: 1.5rem;
@@ -317,7 +351,7 @@
         font-size: 0.9rem;
       }
 
-      .card-img-container {
+      .carousel-inner {
         height: 200px;
       }
 
@@ -412,7 +446,7 @@
 </div>
 
 <footer>
-  <span>Site géré par M.Seddik Elidrissi</span>
+  <span>Site Géré Par : M.Seddik Elidrissi</span>
   <div class="footer-contact">
     <a href="https://wa.me/212608975435" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     <a href="sms:+212608975435" title="Envoyer un SMS"><i class="fas fa-sms"></i></a>
@@ -550,7 +584,11 @@
   const produits = [
     {
       nom: "Maillot équipe nationale",
-      image: "images/maillot.jpg",
+      images: [
+        "images/maillot1.jpg",
+        "images/maillot2.jpg",
+        "images/maillot3.jpg"
+      ],
       prix: "150 MAD",
       tel: "+212608975435",
       whatsapp: "+212608975435",
@@ -559,8 +597,26 @@
       description: "Maillot officiel de l'équipe nationale marocaine, taille L, état neuf avec étiquette."
     },
     {
+      nom: "TV LG 24 Pouce",
+      images: [
+        "images/lg001.jpg",
+        "images/lg002.jpg",
+        "images/lg003.jpg"
+      ],
+      prix: "650 MAD",
+      tel: "+212644601298",
+      whatsapp: "+212644601298",
+      categorie: "Électronique",
+      ville: "Marrakech",
+      description: "LG 24 pouce Europe full HD"
+    },
+    {
       nom: "Bureau",
-      image: "images/001.jpeg",
+      images: [
+        "images/001.jpeg",
+        "images/002.jpeg",
+        "images/003.jpeg"
+      ],
       prix: "900 MAD",
       tel: "+212614712321",
       whatsapp: "+212614712321",
@@ -570,7 +626,12 @@
     },
     {
       nom: "Vélo Betwin",
-      image: "images/002.jpeg",
+      images: [
+        "https://via.placeholder.com/400x300?text=Vélo+Côté",
+        "https://via.placeholder.com/400x300?text=Vélo+Côté",
+        "https://via.placeholder.com/400x300?text=Vélo+Roue",
+        "https://via.placeholder.com/400x300?text=Vélo+Guidon"
+      ],
       prix: "800 MAD",
       tel: "+212617406062",
       whatsapp: "+212617406062",
@@ -580,7 +641,11 @@
     },
     {
       nom: "Téléphone Samsung A12",
-      image: "https://via.placeholder.com/400x300?text=Samsung+A12",
+      images: [
+        "https://via.placeholder.com/400x300?text=Samsung+A12",
+        "https://via.placeholder.com/400x300?text=Samsung+Dos",
+        "https://via.placeholder.com/400x300?text=Samsung+Ecran"
+      ],
       prix: "1000 MAD",
       tel: "+212608975435",
       whatsapp: "+212608975435",
@@ -590,7 +655,11 @@
     },
     {
       nom: "Bureau d'occasion",
-      image: "https://via.placeholder.com/400x300?text=Bureau+Occasion",
+      images: [
+        "https://via.placeholder.com/400x300?text=Bureau+Occasion",
+        "https://via.placeholder.com/400x300?text=Bureau+Tiroirs",
+        "https://via.placeholder.com/400x300?text=Bureau+Détail"
+      ],
       prix: "500 MAD",
       tel: "+212608975435",
       whatsapp: "+212608975435",
@@ -600,7 +669,11 @@
     },
     {
       nom: "Veste en cuir",
-      image: "https://via.placeholder.com/400x300?text=Veste+Cuir",
+      images: [
+        "https://via.placeholder.com/400x300?text=Veste+Cuir",
+        "https://via.placeholder.com/400x300?text=Veste+Dos",
+        "https://via.placeholder.com/400x300?text=Veste+Détail"
+      ],
       prix: "350 MAD",
       tel: "+212608975435",
       whatsapp: "+212608975435",
@@ -610,7 +683,11 @@
     },
     {
       nom: "Ordinateur portable",
-      image: "https://via.placeholder.com/400x300?text=PC+Portable",
+      images: [
+        "https://via.placeholder.com/400x300?text=PC+Portable",
+        "https://via.placeholder.com/400x300?text=PC+Ecran",
+        "https://via.placeholder.com/400x300?text=PC+Dos"
+      ],
       prix: "2500 MAD",
       tel: "+212608975435",
       whatsapp: "+212608975435",
@@ -620,7 +697,12 @@
     },
     {
       nom: "Vélo de course",
-      image: "https://via.placeholder.com/400x300?text=Vélo+Course",
+      images: [
+        "https://via.placeholder.com/400x300?text=Vélo+Course",
+        "https://via.placeholder.com/400x300?text=Vélo+Guidon",
+        "https://via.placeholder.com/400x300?text=Vélo+Roue",
+        "https://via.placeholder.com/400x300?text=Vélo+Freins"
+      ],
       prix: "1200 MAD",
       tel: "+212608975435",
       whatsapp: "+212608975435",
@@ -645,12 +727,44 @@
       const message = encodeURIComponent(`Bonjour, je suis intéressé par votre article : ${p.nom} à ${p.prix}`);
       const whatsappLink = `https://wa.me/${p.whatsapp}?text=${message}`;
       const telLink = `tel:${p.tel}`;
+      
+      // Générer les images pour le carrousel
+      let carouselItems = '';
+      let carouselIndicators = '';
+      
+      p.images.forEach((img, index) => {
+        const activeClass = index === 0 ? 'active' : '';
+        carouselItems += `
+          <div class="carousel-item ${activeClass}">
+            <img src="${img}" class="d-block w-100" alt="${p.nom} - Photo ${index + 1}">
+          </div>
+        `;
+        
+        carouselIndicators += `
+          <button type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" 
+                  data-bs-slide-to="${index}" class="${activeClass}" 
+                  aria-label="Photo ${index + 1}"></button>
+        `;
+      });
 
       container.innerHTML += `
         <div class="col-12 col-sm-6 col-md-4">
           <div class="card shadow-sm">
-            <div class="card-img-container">
-              <img src="${p.image}" class="card-img-top" alt="${p.nom}">
+            <div id="carousel-${p.nom.replace(/\s+/g, '-')}" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                ${carouselIndicators}
+              </div>
+              <div class="carousel-inner">
+                ${carouselItems}
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+              </button>
             </div>
             <div class="card-body">
               <h5 class="card-title">${p.nom}</h5>
@@ -672,6 +786,16 @@
           </div>
         </div>
       `;
+    });
+    
+    // Ajouter les événements pour les clics sur les images
+    document.querySelectorAll('.carousel-item img').forEach(img => {
+      img.addEventListener('click', function() {
+        const modal = document.getElementById("imageModal");
+        const imgModal = document.getElementById("expandedImage");
+        imgModal.src = this.src;
+        modal.style.display = "flex";
+      });
     });
   }
 
@@ -784,10 +908,14 @@
 
   // Gestion des clics sur les images des produits
   document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('card-img-top')) {
+    if (e.target.classList.contains('carousel-item') || 
+        e.target.classList.contains('carousel-inner') || 
+        e.target.classList.contains('carousel-item') || 
+        e.target.classList.contains('d-block') || 
+        e.target.classList.contains('w-100')) {
       const modal = document.getElementById("imageModal");
       const img = document.getElementById("expandedImage");
-      img.src = e.target.src;
+      img.src = e.target.src || e.target.querySelector('img').src;
       modal.style.display = "flex";
     }
     
