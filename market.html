@@ -308,10 +308,11 @@
       to { opacity: 0; }
     }
 
-    /* Styles pour le carrousel */
+    /* Styles pour le carrousel en vert */
     .carousel-inner {
       border-radius: 0;
       height: 250px;
+      background-color: #e8f5e9;
     }
     
     .carousel-item {
@@ -322,24 +323,45 @@
       object-fit: contain;
       height: 100%;
       width: 100%;
-      background-color: #f1f1f1;
+      background-color: #e8f5e9;
     }
     
     .carousel-control-prev, 
     .carousel-control-next {
       width: 8%;
-      background-color: rgba(0,0,0,0.2);
+      background-color: rgba(25, 135, 84, 0.3);
+      transition: all 0.3s;
+    }
+    
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      background-color: rgba(25, 135, 84, 0.7);
+    }
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: #198754;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      background-size: 60%;
     }
     
     .carousel-indicators {
-      margin-bottom: 0;
+      margin-bottom: 5px;
     }
     
-    .carousel-indicators button {
-      width: 10px;
-      height: 10px;
+    .carousel-indicators [data-bs-target] {
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      margin: 0 3px;
+      margin: 0 5px;
+      background-color: rgba(25, 135, 84, 0.5);
+      border: none;
+    }
+    
+    .carousel-indicators .active {
+      background-color: #198754;
     }
 
     @media (max-width: 767px) {
@@ -398,6 +420,17 @@
 
       .footer-contact {
         margin-top: 5px;
+      }
+      
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        width: 30px;
+        height: 30px;
+      }
+      
+      .carousel-indicators [data-bs-target] {
+        width: 8px;
+        height: 8px;
       }
     }
   </style>
@@ -750,7 +783,7 @@
       container.innerHTML += `
         <div class="col-12 col-sm-6 col-md-4">
           <div class="card shadow-sm">
-            <div id="carousel-${p.nom.replace(/\s+/g, '-')}" class="carousel slide" data-bs-ride="carousel">
+            <div id="carousel-${p.nom.replace(/\s+/g, '-')}" class="carousel slide" data-bs-ride="false">
               <div class="carousel-indicators">
                 ${carouselIndicators}
               </div>
