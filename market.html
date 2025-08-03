@@ -191,6 +191,24 @@
       font-size: 0.75rem;
       margin-right: 5px;
     }
+    
+    .badge-negociable {
+      background-color: #198754;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      margin-left: 5px;
+    }
+    
+    .badge-non-negociable {
+      background-color: #dc3545;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      margin-left: 5px;
+    }
 
     .modal-content {
       border-radius: 15px;
@@ -520,6 +538,14 @@
             <option value="Autres">Autres</option>
           </select>
         </div>
+        <div class="mb-3">
+          <label class="form-label">Négociation</label>
+          <select id="filtreNegociable" class="form-select">
+            <option value="">Tous</option>
+            <option value="negociable">Négociable</option>
+            <option value="non-negociable">Non négociable</option>
+          </select>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" id="resetFiltres">
@@ -552,6 +578,21 @@
             <div class="input-group">
               <input type="text" class="form-control" id="prixProduit" required>
               <span class="input-group-text">MAD</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Négociation*</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="negociable" id="negociableOui" value="negociable" checked>
+              <label class="form-check-label" for="negociableOui">
+                Prix négociable
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="negociable" id="negociableNon" value="non-negociable">
+              <label class="form-check-label" for="negociableNon">
+                Prix ferme (non négociable)
+              </label>
             </div>
           </div>
           <div class="mb-3">
@@ -631,6 +672,7 @@
       whatsapp: "+212608975435",
       categorie: "Vêtements",
       ville: "Marrakech",
+      negociable: "negociable",
       description: "Maillot officiel de l'équipe nationale marocaine, taille L, état neuf avec étiquette."
     },
     {
@@ -644,6 +686,7 @@
       whatsapp: "+212771204179",
       categorie: "Meubles",
       ville: "Marrakech",
+      negociable: "non-negociable",
       description: "90cm*80cm*20cm  MDF 18mm."
     },
     {
@@ -660,6 +703,7 @@
       whatsapp: "+212666729053",
       categorie: "Véhicules",
       ville: "Marrakech",
+      negociable: "negociable",
       description: "VTT Betwin à vendre Marrakech Mhamid."
     },
     {
@@ -674,6 +718,7 @@
       whatsapp: "+212644601298",
       categorie: "Électronique",
       ville: "Marrakech",
+      negociable: "negociable",
       description: "LG 24 pouce Europe full HD"
     },
     {
@@ -688,6 +733,7 @@
       whatsapp: "+212614712321",
       categorie: "Meubles",
       ville: "Marrakech",
+      negociable: "non-negociable",
       description: "مكتب نقي للبيع ثمن جد مناسب."
     },
     {
@@ -703,6 +749,7 @@
       whatsapp: "+212617406062",
       categorie: "Véhicules",
       ville: "Marrakech",
+      negociable: "negociable",
       description: "بتوين نمرة 20 مليحة"
     },
     {
@@ -719,6 +766,7 @@
       whatsapp: "+212777660699",
       categorie: "Électronique",
       ville: "Marrakech",
+      negociable: "non-negociable",
       description: "Pc i5 7éme batterie faible Tamnsourt."
     }
   ];
@@ -731,6 +779,10 @@
     const produitsFiltres = produits.filter(p => {
       if (filtres.categorie && p.categorie !== filtres.categorie) return false;
       if (filtres.ville && p.ville !== filtres.ville) return false;
+      if (filtres.negociable) {
+        if (filtres.negociable === "negociable" && p.negociable !== "negociable") return false;
+        if (filtres.negociable === "non-negociable" && p.negociable !== "non-negociable") return false;
+      }
       return true;
     });
 
@@ -758,6 +810,11 @@
         `;
       });
 
+      // Badge négociable/non négociable
+      const badgeNegociable = p.negociable === "negociable" 
+        ? '<span class="badge-negociable"><i class="fas fa-handshake"></i> Négociable</span>' 
+        : '<span class="badge-non-negociable"><i class="fas fa-ban"></i> Non négociable</span>';
+
       container.innerHTML += `
         <div class="col-12 col-sm-6 col-md-4">
           <div class="card shadow-sm">
@@ -779,7 +836,7 @@
             </div>
             <div class="card-body">
               <h5 class="card-title">${p.nom}</h5>
-              <p class="card-text"><strong>Prix:</strong> ${p.prix}</p>
+              <p class="card-text"><strong>Prix:</strong> ${p.prix} ${badgeNegociable}</p>
               <div class="card-description">${p.description}</div>
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <span class="badge-ville"><i class="fas fa-map-marker-alt"></i> ${p.ville}</span>
@@ -847,10 +904,12 @@
   document.getElementById("appliquerFiltres").addEventListener("click", function() {
     const categorie = document.getElementById("filtreCategorie").value;
     const ville = document.getElementById("filtreVille").value;
+    const negociable = document.getElementById("filtreNegociable").value;
     
     const filtres = {};
     if (categorie) filtres.categorie = categorie;
     if (ville) filtres.ville = ville;
+    if (negociable) filtres.negociable = negociable;
     
     afficherProduits(filtres);
     
@@ -866,6 +925,7 @@
   document.getElementById("resetFiltres").addEventListener("click", function() {
     document.getElementById("filtreCategorie").value = "";
     document.getElementById("filtreVille").value = "";
+    document.getElementById("filtreNegociable").value = "";
     afficherProduits();
     
     // Afficher une alerte
@@ -881,6 +941,7 @@
     const tel = document.getElementById('telProduit').value;
     const ville = document.getElementById('villeProduit').value;
     const categorie = document.getElementById('categorieProduit').value;
+    const negociable = document.querySelector('input[name="negociable"]:checked').value;
 
     // Vérification des champs obligatoires
     if (!nom || !prix || !tel || !ville || !categorie) {
@@ -894,6 +955,7 @@
     const message = `Salam, voici une annonce à publier sur le site :%0A
 *Nom:* ${nom}%0A
 *Prix:* ${prix} MAD%0A
+*Négociation:* ${negociable === "negociable" ? "Prix négociable" : "Prix ferme (non négociable)"}%0A
 *Tél vendeur:* +212${tel}%0A
 *Ville:* ${ville}%0A
 *Description:* ${desc || '---'}%0A
