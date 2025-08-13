@@ -382,6 +382,159 @@
       background-color: #198754;
     }
 
+    /* Styles pour les vidéos intégrées */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* Ratio 16:9 */
+      height: 0;
+      overflow: hidden;
+      background-color: #000;
+      margin-bottom: 15px;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Message de fin de vidéo */
+    .video-end-message {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(25, 135, 84, 0.9);
+      color: white;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 15px;
+      z-index: 10;
+      animation: fadeIn 0.5s;
+      box-sizing: border-box;
+    }
+    
+    .video-end-message h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    
+    .video-end-message p {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    
+    .video-end-message .btn-replay {
+      background-color: white;
+      color: #198754;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.8rem;
+    }
+    
+    .video-end-message .btn-replay:hover {
+      background-color: #f8f9fa;
+      transform: scale(1.05);
+    }
+    
+    /* Onglets pour basculer entre images et vidéo */
+    .media-tabs {
+      display: flex;
+      border-bottom: 2px solid #198754;
+    }
+    
+    .media-tab {
+      flex: 1;
+      text-align: center;
+      padding: 8px;
+      background-color: #e8f5e9;
+      cursor: pointer;
+      font-weight: bold;
+      color: #198754;
+      transition: all 0.3s;
+    }
+    
+    .media-tab.active {
+      background-color: #198754;
+      color: white;
+    }
+    
+    .media-tab:first-child {
+      border-top-left-radius: 5px;
+    }
+    
+    .media-tab:last-child {
+      border-top-right-radius: 5px;
+    }
+    
+    .media-content {
+      display: none;
+      position: relative;
+    }
+    
+    .media-content.active {
+      display: block;
+    }
+
+    /* Icônes flottantes */
+    .floating-icons {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+    
+    .floating-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #198754;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    
+    .floating-icon:hover {
+      background-color: #145c3b;
+      transform: scale(1.1);
+    }
+    
+    .floating-icon.top {
+      background-color: #6c757d;
+    }
+    
+    .floating-icon.top:hover {
+      background-color: #5a6268;
+    }
+    
+    .floating-icon.filter {
+      background-color: #17a2b8;
+    }
+    
+    .floating-icon.filter:hover {
+      background-color: #138496;
+    }
+
     @media (max-width: 767px) {
       header h1 {
         font-size: 1.5rem;
@@ -450,6 +603,34 @@
         width: 8px;
         height: 8px;
       }
+      
+      .floating-icons {
+        bottom: 70px;
+        right: 10px;
+      }
+      
+      .floating-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .video-end-message h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+      
+      .video-end-message p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+      }
+      
+      .video-end-message .btn-replay {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -493,6 +674,19 @@
     <div class="row" id="product-list">
       <!-- Produits injectés dynamiquement -->
     </div>
+  </div>
+</div>
+
+<!-- Icônes flottantes -->
+<div class="floating-icons">
+  <div class="floating-icon top" title="Revenir en haut">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  <div class="floating-icon filter" title="Filtrer les annonces" data-bs-toggle="modal" data-bs-target="#modalFiltre">
+    <i class="fas fa-filter"></i>
+  </div>
+  <div class="floating-icon" title="Nouvelle annonce" data-bs-toggle="modal" data-bs-target="#modalProduit">
+    <i class="fas fa-plus"></i>
   </div>
 </div>
 
@@ -638,6 +832,14 @@
             </div>
             <div class="form-text text-muted">Envoyez ensuite la photo manuellement sur WhatsApp si nécessaire.</div>
           </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Lien vidéo YouTube</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fab fa-youtube"></i></span>
+              <input type="url" class="form-control" id="videoProduit" placeholder="https://www.youtube.com/...">
+            </div>
+            <div class="form-text text-muted">Collez le lien complet de la vidéo YouTube.</div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success w-100 py-2 fw-bold">
@@ -739,7 +941,7 @@
       categorie: "Véhicules",
       ville: "Autres",
       negociable: "negociable",
-      description: "Je mets en vente mon vélo de route Nishiki Finisher, taille M, en bon état. Le cadre est en aluminium, léger et solide, avec des jantes double paroi en aluminium. Tous les composants sont d'origine, y compris les freins et le dérailleur Shimano, et le vélo n’a subi aucune modification. Il a été très peu utilisé et toujours bien entretenu. Idéal pour la route et l’entraînement.Contactez-moi si vous êtes intéressé et je suis à El jadida."
+      description: "Je mets en vente mon vélo de route Nishiki Finisher, taille M, en bon état. Le cadre est en aluminium, léger et solide, avec des jantes double paroi en aluminium. Tous les composants sont d'origine, y compris les freins et le dérailleur Shimano, et le vélo n'a subi aucune modification. Il a été très peu utilisé et toujours bien entretenu. Idéal pour la route et l'entraînement.Contactez-moi si vous êtes intéressé et je suis à El jadida."
     },
     {
       nom: "Machine à laver automatique REGAL 9KG",
@@ -886,6 +1088,8 @@
   ];
 
   const container = document.getElementById("product-list");
+  let youtubeAPIReady = false;
+  const youtubePlayers = {};
 
   function afficherProduits(filtres = {}) {
     container.innerHTML = "";
@@ -929,25 +1133,89 @@
         ? '<span class="badge-negociable"><i class="fas fa-handshake"></i> Négociable</span>' 
         : '<span class="badge-non-negociable"><i class="fas fa-ban"></i> Non négociable</span>';
 
+      // Vérifier si le produit a une vidéo YouTube
+      const hasVideo = p.video !== undefined && p.video.includes('youtube.com');
+      
+      // Générer le contenu vidéo si disponible
+      let videoContent = '';
+      let videoTab = '';
+      let mediaTabs = '';
+      
+      if (hasVideo) {
+        // Extraire l'ID de la vidéo YouTube
+        let videoId = '';
+        if (p.video.includes('embed')) {
+          videoId = p.video.split('embed/')[1].split('?')[0];
+        } else if (p.video.includes('youtu.be')) {
+          videoId = p.video.split('youtu.be/')[1].split('?')[0];
+        } else {
+          videoId = p.video.split('v=')[1].split('&')[0];
+        }
+        const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1&mute=1`;
+        
+        videoContent = `
+          <div class="video-container">
+            <iframe src="${embedUrl}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    id="video-iframe-${p.nom.replace(/\s+/g, '-')}">
+            </iframe>
+            <div class="video-end-message" id="video-end-${p.nom.replace(/\s+/g, '-')}">
+              <h3>Merci d'avoir regardé cette vidéo</h3>
+              <p>Pour commander ce produit, contactez le vendeur via le bouton Appeler ou WhatsApp</p>
+              <button class="btn-replay" onclick="replayVideo('video-iframe-${p.nom.replace(/\s+/g, '-')}', 'video-end-${p.nom.replace(/\s+/g, '-')}')">
+                <i class="fas fa-redo"></i> Revoir la vidéo
+              </button>
+            </div>
+          </div>
+        `;
+        
+        // Onglets pour basculer entre images et vidéo
+        mediaTabs = `
+          <div class="media-tabs">
+            <div class="media-tab active" data-target="images-${p.nom.replace(/\s+/g, '-')}">
+              <i class="fas fa-images"></i> Photos
+            </div>
+            <div class="media-tab" data-target="video-${p.nom.replace(/\s+/g, '-')}">
+              <i class="fas fa-video"></i> Vidéo
+            </div>
+          </div>
+        `;
+        
+        videoTab = `
+          <div class="media-content" id="video-${p.nom.replace(/\s+/g, '-')}">
+            ${videoContent}
+          </div>
+        `;
+      }
+
       container.innerHTML += `
         <div class="col-12 col-sm-6 col-md-4">
           <div class="card shadow-sm">
-            <div id="carousel-${p.nom.replace(/\s+/g, '-')}" class="carousel slide" data-bs-ride="false">
-              <div class="carousel-indicators">
-                ${carouselIndicators}
+            ${hasVideo ? mediaTabs : ''}
+            
+            <div class="media-content active" id="images-${p.nom.replace(/\s+/g, '-')}">
+              <div id="carousel-${p.nom.replace(/\s+/g, '-')}" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-indicators">
+                  ${carouselIndicators}
+                </div>
+                <div class="carousel-inner">
+                  ${carouselItems}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Précédent</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Suivant</span>
+                </button>
               </div>
-              <div class="carousel-inner">
-                ${carouselItems}
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Précédent</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Suivant</span>
-              </button>
             </div>
+            
+            ${hasVideo ? videoTab : ''}
+            
             <div class="card-body">
               <h5 class="card-title">${p.nom}</h5>
               <p class="card-text"><strong>Prix:</strong> ${p.prix} ${badgeNegociable}</p>
@@ -979,7 +1247,96 @@
         modal.style.display = "flex";
       });
     });
+    
+    // Gestion des onglets médias
+    document.querySelectorAll('.media-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-target');
+        const parentCard = this.closest('.card');
+        
+        // Désactiver tous les onglets et contenus
+        parentCard.querySelectorAll('.media-tab').forEach(t => t.classList.remove('active'));
+        parentCard.querySelectorAll('.media-content').forEach(c => c.classList.remove('active'));
+        
+        // Activer l'onglet et le contenu sélectionné
+        this.classList.add('active');
+        parentCard.querySelector(`#${targetId}`).classList.add('active');
+        
+        // Si c'est une vidéo, initialiser le lecteur YouTube
+        if (targetId.startsWith('video-')) {
+          const videoIframe = parentCard.querySelector('iframe');
+          if (videoIframe && youtubeAPIReady) {
+            initYouTubePlayer(videoIframe);
+          }
+        }
+      });
+    });
+    
+    // Initialiser les lecteurs YouTube si l'API est déjà chargée
+    if (youtubeAPIReady) {
+      initAllYouTubePlayers();
+    }
   }
+
+  // Initialiser un lecteur YouTube individuel
+  function initYouTubePlayer(iframe) {
+    const playerId = iframe.id;
+    if (!youtubePlayers[playerId]) {
+      youtubePlayers[playerId] = new YT.Player(playerId, {
+        events: {
+          'onReady': (event) => {
+            // Activer le son si possible
+            try {
+              event.target.unMute();
+              event.target.setVolume(50); // Volume à 50%
+            } catch (e) {
+              console.log("Impossible de modifier le volume", e);
+            }
+          },
+          'onStateChange': (event) => {
+            if (event.data === YT.PlayerState.ENDED) {
+              const parentCard = iframe.closest('.card');
+              const videoEndMessage = parentCard.querySelector('.video-end-message');
+              if (videoEndMessage) {
+                videoEndMessage.style.display = 'flex';
+              }
+            }
+          }
+        }
+      });
+    }
+  }
+
+  // Initialiser tous les lecteurs YouTube visibles
+  function initAllYouTubePlayers() {
+    document.querySelectorAll('.media-content.active iframe').forEach(iframe => {
+      if (iframe.src.includes('youtube.com')) {
+        initYouTubePlayer(iframe);
+      }
+    });
+  }
+
+  // Fonction pour rejouer la vidéo
+  window.replayVideo = function(iframeId, messageId) {
+    const iframe = document.getElementById(iframeId);
+    const message = document.getElementById(messageId);
+    
+    if (iframe && message) {
+      // Pour YouTube, nous utilisons l'API
+      if (youtubePlayers[iframeId]) {
+        youtubePlayers[iframeId].seekTo(0);
+        youtubePlayers[iframeId].playVideo();
+        youtubePlayers[iframeId].unMute(); // Activer le son lors du replay
+      } else {
+        // Solution de repli si l'API n'est pas chargée
+        const src = iframe.src.split('?')[0]; // Supprimer les paramètres existants
+        iframe.src = src + '?enablejsapi=1&rel=0&modestbranding=1&autoplay=1&mute=0';
+      }
+      
+      // Masquer le message
+      message.style.display = 'none';
+    }
+  };
 
   // Fonction pour afficher les alertes
   function showAlert(message) {
@@ -1000,8 +1357,23 @@
     alertModal.classList.remove('show');
   }
 
+  // Charger l'API YouTube
+  function loadYouTubeAPI() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
+
+  // Fonction appelée par l'API YouTube quand elle est prête
+  window.onYouTubeIframeAPIReady = function() {
+    youtubeAPIReady = true;
+    initAllYouTubePlayers();
+  };
+
   // Afficher tous les produits au chargement
   afficherProduits();
+  loadYouTubeAPI();
 
   // Recherche dynamique
   document.getElementById("recherche").addEventListener("input", function () {
@@ -1056,6 +1428,7 @@
     const ville = document.getElementById('villeProduit').value;
     const categorie = document.getElementById('categorieProduit').value;
     const negociable = document.querySelector('input[name="negociable"]:checked').value;
+    const video = document.getElementById('videoProduit').value;
 
     // Vérification des champs obligatoires
     if (!nom || !prix || !tel || !ville || !categorie) {
@@ -1074,6 +1447,7 @@
 *Ville:* ${ville}%0A
 *Description:* ${desc || '---'}%0A
 *Photo:* ${img || 'à envoyer séparément'}%0A
+*Vidéo YouTube:* ${video || '---'}%0A
 *Catégorie:* ${categorie}`;
 
     const whatsappAdmin = '212608975435';
@@ -1118,9 +1492,16 @@
       document.getElementById("imageModal").style.display = "none";
     }
   });
+  
+  // Gestion des icônes flottantes
+  document.querySelector('.floating-icon.top').addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
