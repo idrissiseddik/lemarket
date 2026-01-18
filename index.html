@@ -1,516 +1,1633 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Entre Particuliers - Accueil</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        
-        .container-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
-        
-        .welcome-container {
-            max-width: 800px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border: 2px solid #198754;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #198754;
-        }
-        
-        .logo i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-        
-        .logo h1 {
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .language-selector {
-            text-align: center;
-            margin-bottom: 15px;
-            white-space: nowrap;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
-        
-        .conditions-wrapper {
-            flex: 1;
-            position: relative;
-            margin-bottom: 10px;
-            border: 2px solid #198754;
-            border-radius: 10px;
-            padding: 2px;
-        }
-        
-        .conditions-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 40px;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-        
-        .conditions {
-            background-color: #f1f8f1;
-            padding: 20px;
-            text-align: justify;
-            text-justify: inter-word;
-            height: 100%;
-            position: relative;
-        }
-        
-        .scroll-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-        
-        .scroll-btn {
-            background-color: #198754;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .scroll-btn:hover {
-            background-color: #145c3b;
-            transform: scale(1.1);
-        }
-        
-        .scroll-btn:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        
-        .btn-accept {
-            background-color: #198754;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            border: none;
-            display: block;
-            margin: 20px auto 0;
-            width: 200px;
-            text-align: center;
-        }
-        
-        .btn-accept:hover {
-            background-color: #145c3b;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
-        }
-        
-        footer {
-            background-color: #f8f9fa;
-            padding: 15px 0;
-            text-align: center;
-            border-top: 1px solid #e9ecef;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .contact-icons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .contact-icons a {
-            color: #198754;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-        
-        .contact-icons a:hover {
-            color: #145c3b;
-            transform: scale(1.2);
-        }
-        
-        .language-btn {
-            background: none;
-            border: 1px solid #198754;
-            color: #198754;
-            padding: 5px 15px;
-            margin: 0 5px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
-            min-width: 80px;
-        }
-        
-        .language-btn.active {
-            background-color: #198754;
-            color: white;
-        }
-        
-        .language-btn:hover:not(.active) {
-            background-color: #e9f5ee;
-        }
-        
-        .rtl-text {
-            direction: rtl;
-            text-align: justify;
-            text-justify: inter-word;
-        }
-        
-        .alert-warning {
-            background-color: #fff3cd;
-            border-color: #ffeeba;
-            color: #856404;
-        }
-        
-        .language-selector::-webkit-scrollbar {
-            height: 5px;
-        }
-        
-        .language-selector::-webkit-scrollbar-thumb {
-            background: #198754;
-            border-radius: 10px;
-        }
-        
-        .language-selector::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        @media (max-width: 768px) {
-            .container-wrapper {
-                padding: 10px;
-            }
-            
-            .welcome-container {
-                padding: 15px;
-                border-width: 2px;
-            }
-            
-            .logo i {
-                font-size: 2.5rem;
-            }
-            
-            .logo h1 {
-                font-size: 1.8rem;
-            }
-            
-            .btn-accept {
-                width: 100%;
-                padding: 12px;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .language-btn {
-                padding: 5px 10px;
-                margin: 0 3px;
-                min-width: 70px;
-                font-size: 0.9rem;
-            }
-            
-            .scroll-controls {
-                gap: 10px;
-            }
-            
-            .scroll-btn {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .conditions-wrapper {
-                border-width: 2px;
-                padding: 2px;
-            }
-            
-            .conditions {
-                padding: 15px;
-                font-size: 0.95rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site de vente entre particuliers</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://kit.fontawesome.com/a2d9a8d2d3.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      margin-top: 160px;
+      padding-bottom: 90px;
+    }
+
+    header {
+      background-color: #198754;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      height: auto;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    header h1 {
+      margin-bottom: 0.2rem;
+      font-size: 1.8rem;
+    }
+
+    header p {
+      margin-bottom: 0;
+      font-size: 1rem;
+    }
+
+    .marquee-container {
+      overflow: hidden;
+      background-color: #e8f5e9;
+      padding: 10px 0;
+      position: fixed;
+      top: 80px;
+      width: 100%;
+      z-index: 999;
+    }
+
+    .marquee-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 15s linear infinite;
+      font-weight: bold;
+      color: #198754;
+      padding-left: 100%;
+    }
+
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .content {
+      margin-top: 160px;
+    }
+
+    .bouton-ajout {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      border: 2px solid #198754;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 20px rgba(25, 135, 84, 0.2);
+    }
+
+    .card-img-container {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f1f1f1;
+      border-bottom: 2px solid #198754;
+      cursor: pointer;
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-img-top {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 10px 0;
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .btn-contact {
+      margin-top: 10px;
+      background-color: #198754;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .btn-contact:hover {
+      background-color: #145c3b;
+    }
+
+    footer {
+      background-color: #198754;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 10px 0;
+      text-align: center;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .footer-contact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-contact a {
+      color: white;
+      font-size: 1.2rem;
+      transition: transform 0.2s;
+    }
+
+    .footer-contact a:hover {
+      transform: scale(1.2);
+    }
+
+    .badge-ville {
+      background-color: #198754;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .badge-categorie {
+      background-color: #6c757d;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      margin-right: 5px;
+    }
+    
+    .badge-negociable {
+      background-color: #198754;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      margin-left: 5px;
+    }
+    
+    .badge-non-negociable {
+      background-color: #dc3545;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      margin-left: 5px;
+    }
+
+    .modal-content {
+      border-radius: 15px;
+      border: 2px solid #198754;
+    }
+
+    .modal-header {
+      border-bottom: 2px solid #198754;
+      position: sticky;
+      top: 0;
+      background-color: #198754;
+      z-index: 1;
+    }
+
+    .modal-footer {
+      border-top: 2px solid #198754;
+      position: sticky;
+      bottom: 0;
+      background-color: white;
+      z-index: 1;
+    }
+
+    .form-control, .form-select {
+      border-radius: 8px;
+      border: 1px solid #198754;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: #198754;
+      box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    }
+
+    /* Modal image plein écran */
+    .modal-image {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      overflow: auto;
+    }
+
+    .modal-image-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+
+    .modal-image-content img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .close-image {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+      background-color: red;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 50px;
+    }
+
+    .close-image:hover {
+      transform: scale(1.1);
+    }
+
+    /* Modal d'alerte */
+    .alert-modal {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2000;
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+
+    .alert-modal.show {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .alert-modal-content {
+      background-color: #dc3545;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .alert-close {
+      cursor: pointer;
+      margin-left: 15px;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    /* Styles pour le carrousel en vert */
+    .carousel-inner {
+      border-radius: 0;
+      height: 250px;
+      background-color: #e8f5e9;
+    }
+    
+    .carousel-item {
+      height: 100%;
+    }
+    
+    .carousel-item img {
+      object-fit: contain;
+      height: 100%;
+      width: 100%;
+      background-color: #e8f5e9;
+    }
+    
+    .carousel-control-prev, 
+    .carousel-control-next {
+      width: 8%;
+      background-color: rgba(25, 135, 84, 0.3);
+      transition: all 0.3s;
+    }
+    
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      background-color: rgba(25, 135, 84, 0.7);
+    }
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: #198754;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      background-size: 60%;
+    }
+    
+    .carousel-indicators {
+      margin-bottom: 5px;
+    }
+    
+    .carousel-indicators [data-bs-target] {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin: 0 5px;
+      background-color: rgba(25, 135, 84, 0.5);
+      border: none;
+    }
+    
+    .carousel-indicators .active {
+      background-color: #198754;
+    }
+
+    /* Styles pour les vidéos intégrées */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* Ratio 16:9 */
+      height: 0;
+      overflow: hidden;
+      background-color: #000;
+      margin-bottom: 15px;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Message de fin de vidéo */
+    .video-end-message {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(25, 135, 84, 0.9);
+      color: white;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 15px;
+      z-index: 10;
+      animation: fadeIn 0.5s;
+      box-sizing: border-box;
+    }
+    
+    .video-end-message h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    
+    .video-end-message p {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    
+    .video-end-message .btn-replay {
+      background-color: white;
+      color: #198754;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.8rem;
+    }
+    
+    .video-end-message .btn-replay:hover {
+      background-color: #f8f9fa;
+      transform: scale(1.05);
+    }
+    
+    /* Onglets pour basculer entre images et vidéo */
+    .media-tabs {
+      display: flex;
+      border-bottom: 2px solid #198754;
+    }
+    
+    .media-tab {
+      flex: 1;
+      text-align: center;
+      padding: 8px;
+      background-color: #e8f5e9;
+      cursor: pointer;
+      font-weight: bold;
+      color: #198754;
+      transition: all 0.3s;
+    }
+    
+    .media-tab.active {
+      background-color: #198754;
+      color: white;
+    }
+    
+    .media-tab:first-child {
+      border-top-left-radius: 5px;
+    }
+    
+    .media-tab:last-child {
+      border-top-right-radius: 5px;
+    }
+    
+    .media-content {
+      display: none;
+      position: relative;
+    }
+    
+    .media-content.active {
+      display: block;
+    }
+
+    /* Icônes flottantes */
+    .floating-icons {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+    
+    .floating-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #198754;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    
+    .floating-icon:hover {
+      background-color: #145c3b;
+      transform: scale(1.1);
+    }
+    
+    .floating-icon.top {
+      background-color: #6c757d;
+    }
+    
+    .floating-icon.top:hover {
+      background-color: #5a6268;
+    }
+    
+    .floating-icon.filter {
+      background-color: #17a2b8;
+    }
+    
+    .floating-icon.filter:hover {
+      background-color: #138496;
+    }
+
+    @media (max-width: 767px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      
+      header p {
+        font-size: 0.9rem;
+      }
+
+      .carousel-inner {
+        height: 200px;
+      }
+
+      .marquee-text {
+        font-size: 0.9rem;
+      }
+
+      .bouton-ajout {
+        margin-top: 15px;
+      }
+      
+      .btn-call, .btn-whatsapp {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+      }
+
+      .col-12 {
+        margin-bottom: 15px;
+      }
+
+      body {
+        padding-bottom: 100px;
+      }
+
+      .card-description {
+        -webkit-line-clamp: 2;
+      }
+
+      .close-image {
+        top: 10px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+        line-height: 40px;
+      }
+
+      footer {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        gap: 5px;
+      }
+
+      .footer-contact {
+        margin-top: 5px;
+      }
+      
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        width: 30px;
+        height: 30px;
+      }
+      
+      .carousel-indicators [data-bs-target] {
+        width: 8px;
+        height: 8px;
+      }
+      
+      .floating-icons {
+        bottom: 70px;
+        right: 10px;
+      }
+      
+      .floating-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+      
+      .modal-dialog {
+        margin: 0.5rem;
+      }
+      
+      .modal-lg {
+        max-width: 95%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .video-end-message h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+      
+      .video-end-message p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+      }
+      
+      .video-end-message .btn-replay {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Styles pour le modal avec header et footer fixes - HAUTEUR AUGMENTÉE */
+    .modal-dialog-scrollable {
+      max-height: calc(100vh - 100px);
+    }
+    
+    .modal-body-scrollable {
+      max-height: calc(85vh - 150px);
+      overflow-y: auto;
+    }
+    
+    /* Taille augmentée pour la modale d'annonce */
+    #modalProduit .modal-dialog {
+      max-width: 800px;
+    }
+    
+    #modalProduit .modal-content {
+      height: 85vh;
+      max-height: 700px;
+    }
+    
+    /* Pour les grands écrans */
+    @media (min-height: 900px) {
+      #modalProduit .modal-content {
+        height: 80vh;
+        max-height: 750px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container-wrapper">
-        <div class="welcome-container">
-            <div class="logo">
-                <i class="fas fa-store"></i>
-                <h1>Market Entre Particuliers</h1>
-                <p>Un clic pour vendre..,Un clic pour acheter...!</p>
-            </div>
-            
-            <div class="language-selector">
-                <button class="language-btn active" data-lang="fr">Français</button>
-                <button class="language-btn" data-lang="ar">العربية</button>
-                <button class="language-btn" data-lang="en">English</button>
-            </div>
-            
-            <div class="conditions-wrapper">
-                <div class="conditions-container">
-                    <div class="conditions" id="conditions-content">
-                        <div id="fr-text">
-                            <h5>Principes Fondamentaux de Notre Marketplace</h5>
-                            <p>Market Entre Particuliers est une plateforme dédiée aux échanges locaux entre particuliers, favorisant une économie collaborative et des transactions en toute confiance.</p>
-                            
-                            <h6>Notre Rôle :</h6>
-                            <ul>
-                                <li>Nous mettons en relation acheteurs et vendeurs locaux</li>
-                                <li>Nous fournissons un espace sécurisé pour vos annonces</li>
-                                <li>Nous ne sommes pas partie prenante dans les transactions</li>
-                            </ul>
 
-                            <h6>Vos Engagements :</h6>
-                            <ul>
-                                <li><strong>Authenticité :</strong> Tous les articles doivent être décrits avec exactitude</li>
-                                <li><strong>Transparence :</strong> Prix clairs et photos réelles des produits</li>
-                                <li><strong>Respect :</strong> Communications courtoises entre membres</li>
-                                <li><strong>Sécurité :</strong> Privilégiez les rencontres dans des lieux publics</li>
-                            </ul>
+<header>
+  <h1><i class="fas fa-store"></i> Market Entre Particuliers</h1>
+  <p>Un clic pour vendre..,Un clic pour acheter...!</p>
+</header>
 
-                            <h6>Bonnes Pratiques :</h6>
-                            <ol>
-                                <li>Vérifiez l'état des articles avant achat</li>
-                                <li>Conservez les échanges</li>
-                                <li>Signalez tout contenu inapproprié ou comportement suspect</li>
-                                <li>Donnez votre avis sur vos transactions pour aider la communauté</li>
-                            </ol>
+<div class="marquee-container">
+  <div class="marquee-text">
+    Bienvenue dans votre Market en ligne – Publiez vos produits à vendre facilement !
+  </div>
+</div>
 
-                            <div class="alert alert-warning mt-3">
-                                <i class="fas fa-exclamation-triangle me-2"></i>
-                                <strong>Important :</strong> Notre plateforme ne garantit pas les transactions et décline toute responsabilité concernant les articles échangés. Votre vigilance est essentielle.
-                            </div>
+<!-- Modal d'alerte -->
+<div id="alertModal" class="alert-modal">
+  <div class="alert-modal-content">
+    <span id="alertMessage"></span>
+    <span class="alert-close" onclick="hideAlert()">&times;</span>
+  </div>
+</div>
 
-                            <p class="text-muted mt-3"><small>En cliquant sur "J'accepte", vous reconnaissez avoir lu et compris ces principes et vous vous engagez à les respecter dans toutes vos interactions sur notre plateforme.</small></p>
-                        </div>
-                        
-                        <div id="ar-text" class="rtl-text" style="display: none;">
-                            <h5>المبادئ الأساسية للسوق بين الأفراد</h5>
-                            <p>Market Entre Particuliers هي منصة مخصصة للتبادل المحلي بين الأفراد، تعزز الاقتصاد التشاركي والمعاملات الموثوقة.</p>
-                            
-                            <h6>دورنا:</h6>
-                            <ul>
-                                <li>نحن نربط بين المشترين والبائعين المحليين</li>
-                                <li>نوفر مساحة آمنة لإعلاناتكم</li>
-                                <li>لسنا طرفًا في المعاملات</li>
-                            </ul>
-
-                            <h6>التزاماتكم:</h6>
-                            <ul>
-                                <li><strong>الصدق:</strong> يجب وصف جميع العناصر بدقة</li>
-                                <li><strong>الشفافية:</strong> أسعار واضحة وصور حقيقية للمنتجات</li>
-                                <li><strong>الاحترام:</strong> تواصل مهذب بين الأعضاء</li>
-                                <li><strong>السلامة:</strong> فضلوا اللقاءات في الأماكن العامة</li>
-                            </ul>
-
-                            <h6>أفضل الممارسات:</h6>
-                            <ol>
-                                <li>تحقق من حالة العناصر قبل الشراء</li>
-                                <li>احتفظ بالمراسلات</li>
-                                <li>بلغ عن أي محتوى غير لائق أو سلوك مشبوه</li>
-                                <li>شارك رأيك في المعاملات لمساعدة المجتمع</li>
-                            </ol>
-
-                            <div class="alert alert-warning mt-3">
-                                <i class="fas fa-exclamation-triangle me-2"></i>
-                                <strong>هام:</strong> لا تضمن منصتنا المعاملات وتتنصل من أي مسؤولية بخصوص العناصر المتبادلة. يقظتك ضرورية.
-                            </div>
-
-                            <p class="text-muted mt-3"><small>بالنقر على "أوافق"، فإنك تقر بأنك قد قرأت وفهمت هذه المبادئ وتتعهد باحترامها في جميع تفاعلاتك على منصتنا.</small></p>
-                        </div>
-                        
-                        <div id="en-text" style="display: none;">
-                            <h5>Core Principles of Our Marketplace</h5>
-                            <p>Market Entre Particuliers is a platform dedicated to local peer-to-peer exchanges, promoting collaborative economy and trusted transactions.</p>
-                            
-                            <h6>Our Role:</h6>
-                            <ul>
-                                <li>We connect local buyers and sellers</li>
-                                <li>We provide a secure space for your listings</li>
-                                <li>We are not party to transactions</li>
-                            </ul>
-
-                            <h6>Your Commitments:</h6>
-                            <ul>
-                                <li><strong>Authenticity:</strong> All items must be accurately described</li>
-                                <li><strong>Transparency:</strong> Clear prices and real product photos</li>
-                                <li><strong>Respect:</strong> Courteous communication between members</li>
-                                <li><strong>Safety:</strong> Prefer meetings in public places</li>
-                            </ul>
-
-                            <h6>Best Practices:</h6>
-                            <ol>
-                                <li>Check item condition before purchase</li>
-                                <li>Keep communications</li>
-                                <li>Report any inappropriate content or suspicious behavior</li>
-                                <li>Share your transaction feedback to help the community</li>
-                            </ol>
-
-                            <div class="alert alert-warning mt-3">
-                                <i class="fas fa-exclamation-triangle me-2"></i>
-                                <strong>Important:</strong> Our platform does not guarantee transactions and disclaims any responsibility regarding exchanged items. Your vigilance is essential.
-                            </div>
-
-                            <p class="text-muted mt-3"><small>By clicking "I accept", you acknowledge having read and understood these principles and commit to respecting them in all your interactions on our platform.</small></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="scroll-controls">
-                    <button class="scroll-btn" id="scroll-up" disabled>
-                        <i class="fas fa-arrow-up"></i>
-                    </button>
-                    <button class="scroll-btn" id="scroll-down">
-                        <i class="fas fa-arrow-down"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <a href="market.html" class="btn btn-accept">
-                <i class="fas fa-check-circle"></i> <span class="accept-text">J'accepte</span>
-            </a>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <span>Site Géré Par : M.Seddik Elidrissi</span>
-            <div class="contact-icons">
-                <a href="https://wa.me/212608975435" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="sms:+212608975435" title="Envoyer un SMS"><i class="fas fa-sms"></i></a>
-                <a href="tel:+212608975435" title="Appeler"><i class="fas fa-phone"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<div class="content">
+  <div class="container d-flex justify-content-between mb-3">
+    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalFiltre">
+      <i class="fas fa-filter"></i> Filtrer les annonces
+    </button>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Language switching functionality
-            const languageButtons = document.querySelectorAll('.language-btn');
-            const textElements = {
-                fr: document.getElementById('fr-text'),
-                ar: document.getElementById('ar-text'),
-                en: document.getElementById('en-text')
-            };
-            const acceptButtonText = document.querySelector('.accept-text');
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalProduit">
+      <i class="fas fa-plus-circle"></i> Envoyer un produit
+    </button>
+  </div>
+
+  <div class="container mb-3">
+    <input type="text" class="form-control" id="recherche" placeholder="Rechercher un produit..." />
+  </div>
+
+  <div class="container">
+    <div class="row" id="product-list">
+      <!-- Produits injectés dynamiquement -->
+    </div>
+  </div>
+</div>
+
+<!-- Icônes flottantes -->
+<div class="floating-icons">
+  <div class="floating-icon top" title="Revenir en haut">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  <div class="floating-icon filter" title="Filtrer les annonces" data-bs-toggle="modal" data-bs-target="#modalFiltre">
+    <i class="fas fa-filter"></i>
+  </div>
+  <div class="floating-icon" title="Nouvelle annonce" data-bs-toggle="modal" data-bs-target="#modalProduit">
+    <i class="fas fa-plus"></i>
+  </div>
+</div>
+
+<footer>
+  <span>Site Géré Par : M.Seddik Elidrissi</span>
+  <div class="footer-contact">
+    <a href="https://wa.me/212608975435" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="sms:+212608975435" title="Envoyer un SMS"><i class="fas fa-sms"></i></a>
+    <a href="tel:+212608975435" title="Appeler"><i class="fas fa-phone"></i></a>
+  </div>
+</footer>
+
+<!-- Modal filtre -->
+<div class="modal fade" id="modalFiltre" tabindex="-1" aria-labelledby="modalFiltreLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="modalFiltreLabel">Filtrer les annonces</h5>
+        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Catégorie</label>
+          <select id="filtreCategorie" class="form-select">
+            <option value="">Toutes catégories</option>
+            <option value="Meubles">Meubles</option>
+            <option value="Électronique">Électronique</option>
+            <option value="Vêtements">Vêtements</option>
+            <option value="Véhicules">Véhicules</option>
+            <option value="Immobilier">Immobilier</option>
+            <option value="Produits alimentaire">Produits alimentaire</option>
+            <option value="Autres">Autres</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Ville</label>
+          <select id="filtreVille" class="form-select">
+            <option value="">Toutes villes</option>
+            <option value="Casablanca">Casablanca</option>
+            <option value="Rabat">Rabat</option>
+            <option value="Marrakech">Marrakech</option>
+            <option value="Fès">Fès</option>
+            <option value="Tanger">Tanger</option>
+            <option value="Autres">Autres</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Négociation</label>
+          <select id="filtreNegociable" class="form-select">
+            <option value="">Tous</option>
+            <option value="negociable">Négociable</option>
+            <option value="non-negociable">Non négociable</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" id="resetFiltres">
+          Réinitialiser
+        </button>
+        <button type="button" class="btn btn-success" id="appliquerFiltres">
+          Appliquer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal produit - HAUTEUR AUGMENTÉE ET HEADER/FOOTER FIXES -->
+<div class="modal fade" id="modalProduit" tabindex="-1" aria-labelledby="modalProduitLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="modalProduitLabel"><i class="fas fa-cart-plus"></i> Nouvelle annonce</h5>
+        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body modal-body-scrollable">
+        <form id="formProduit">
+          <div class="mb-3">
+            <label class="form-label fw-bold">Nom du produit*</label>
+            <input type="text" class="form-control" id="nomProduit" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Prix*</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="prixProduit" required>
+              <span class="input-group-text">MAD</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Négociation*</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="negociable" id="negociableOui" value="negociable" checked>
+              <label class="form-check-label" for="negociableOui">
+                Prix négociable
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="negociable" id="negociableNon" value="non-negociable">
+              <label class="form-check-label" for="negociableNon">
+                Prix ferme (non négociable)
+              </label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Téléphone du vendeur*</label>
+            <div class="input-group">
+              <span class="input-group-text">+212</span>
+              <input type="text" class="form-control" id="telProduit" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Ville*</label>
+            <select class="form-select" id="villeProduit" required>
+              <option value="">Sélectionnez une ville</option>
+              <option value="Casablanca">Casablanca</option>
+              <option value="Rabat">Rabat</option>
+              <option value="Marrakech">Marrakech</option>
+              <option value="Fès">Fès</option>
+              <option value="Tanger">Tanger</option>
+              <option value="Autres">Autres</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Description</label>
+            <textarea class="form-control" id="descProduit" rows="3" placeholder="Décrivez votre produit..."></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Catégorie*</label>
+            <select id="categorieProduit" class="form-select" required>
+              <option value="">Sélectionnez une catégorie</option>
+              <option value="Meubles">Meubles</option>
+              <option value="Électronique">Électronique</option>
+              <option value="Vêtements">Vêtements</option>
+              <option value="Véhicules">Véhicules</option>
+              <option value="Immobilier">Immobilier</option>
+              <option value="Produits alimentaire">Produits alimentaire</option>
+              <option value="Autres">Autres</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Lien de la photo (URL)</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-image"></i></span>
+              <input type="url" class="form-control" id="imgProduit" placeholder="https://...">
+            </div>
+            <div class="form-text text-muted">Envoyez ensuite la photo manuellement sur WhatsApp si nécessaire.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Lien vidéo YouTube</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fab fa-youtube"></i></span>
+              <input type="url" class="form-control" id="videoProduit" placeholder="https://www.youtube.com/...">
+            </div>
+            <div class="form-text text-muted">Collez le lien complet de la vidéo YouTube.</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" form="formProduit" class="btn btn-success w-100 py-2 fw-bold">
+          <i class="fab fa-whatsapp"></i> Envoyer l'annonce
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal pour l'image en plein écran -->
+<div id="imageModal" class="modal-image">
+  <div class="modal-image-content">
+    <span class="close-image">&times;</span>
+    <img id="expandedImage" src="" alt="Image agrandie">
+  </div>
+</div>
+
+<script>
+  // LISTE DES PRODUITS EXISTANTS
+  const produits = [
+    {
+      nom: "Maillot équipe nationale",
+      images: [
+        "images/maillot1.jpg",
+        "images/maillot2.jpg",
+        "images/maillot3.jpg"
+      ],
+      prix: "150 MAD",
+      tel: "+212608975435",
+      whatsapp: "+212608975435",
+      categorie: "Vêtements",
+      ville: "Marrakech",
+      negociable: "negociable",
+      description: "Maillot officiel de l'équipe nationale marocaine, taille L, état neuf avec étiquette."
+    },
+    {
+      nom: "زيت بذور اليقطين",
+      images: [
+        "images2/000013.jpg",
+        "images2/000014.jpg"
+      ],
+      prix: "200 MAD",
+      tel: "+212608760348",
+      whatsapp: "+212608760348",
+      categorie: "Autres",
+      ville: "Rabat",
+      negociable: "non-negociable",
+      description: "بذور اليقطين بزيت بذور اليقطين تعالج مشكل تضخّم البروستات، نهديك معها كيسا من بذور حب الغاز مطحون، المنتوج مجرّب، وهو ذو فعالية ممتازة للقضاء على مشكل تضخّم البروستات"
+    },
+    {
+      nom: "لعبة طريق الهجرة",
+      images: [
+        "images2/al3ab.jpg",
+        "images2/al3ab.jpg"
+      ],
+      prix: "275 MAD",
+      tel: "+212665881521",
+      whatsapp: "+212665881521",
+      categorie: "Autres",
+      ville: "Autres",
+      negociable: "negociable",
+      description: "ندعوكم لاكتشاف ألعابنا التعليمية والتربوية.",
+      video: "https://www.youtube.com/watch?v=im3VZariZcE"
+    },
+    {
+      nom: "خزانة احذية",
+      images: [
+        "images2/00013.jpg",
+        "images2/00014.jpg",
+        "images2/00015.jpg",
+        "images2/00016.jpg",
+        "images2/00017.jpg",
+        "images2/00018.jpg"
+      ],
+      prix: "900 MAD",
+      tel: "+212722266810",
+      whatsapp: "+212722266810",
+      categorie: "Meubles",
+      ville: "Marrakech",
+      negociable: "negociable",
+      description: "خزانة أحذية عملية ومتينة من خشب، تحافظ على أحذيتك منظمة ومرتبة."
+    },
+    {
+      nom: "مخاد حرير الصابرة",
+      images: [
+        "images/mkhad001.jpg",
+        "images/mkhad002.jpg",
+        "images/mkhad003.jpg",
+        "images/mkhad004.jpg",
+        "images/mkhad005.jpg"
+      ],
+      prix: "90 MAD",
+      tel: "+212679380072",
+      whatsapp: "+212679380072",
+      categorie: "Autres",
+      ville: "Autres",
+      negociable: "negociable",
+      description: "مخاد الصابرة مصنوعة يديويا من حرير الصابرة الطبيعي مقاس 50*50 سم."
+    },
+    {
+      nom: "محفظة رجالية",
+      images: [
+        "images/sac001.jpg",
+        "images/sac002.jpg",
+        "images/sac003.jpg"
+      ],
+      prix: "120 MAD",
+      tel: "+212627174595",
+      whatsapp: "+212627174595",
+      categorie: "Autres",
+      ville: "Marrakech",
+      negociable: "negociable",
+      description: "---."
+    },
+    {
+      nom: "Vélo de route",
+      images: [
+        "images/WA0028.jpg",
+        "images/WA0029.jpg",
+        "images/WA0030.jpg",
+        "images/WA0031.jpg"
+      ],
+      prix: "2300 MAD",
+      tel: "+212652152544",
+      whatsapp: "+212652152544",
+      categorie: "Véhicules",
+      ville: "Autres",
+      negociable: "negociable",
+      description: "Je mets en vente mon vélo de route Nishiki Finisher, taille M, en bon état. Le cadre est en aluminium, léger et solide, avec des jantes double paroi en aluminium. Tous les composants sont d'origine, y compris les freins et le dérailleur Shimano, et le vélo n'a subi aucune modification. Il a été très peu utilisé et toujours bien entretenu. Idéal pour la route et l'entraînement.Contactez-moi si vous êtes intéressé et je suis à El jadida."
+    },
+    {
+      nom: "Machine à laver automatique REGAL 9KG",
+      images: [
+        "images/0019.jpg",
+        "images/0020.jpg",
+        "images/0021.jpg",
+        "images/0022.jpg",
+        "images/0023.jpg"
+      ],
+      prix: "2500 MAD",
+      tel: "+212617669406",
+      whatsapp: "+212617669406",
+      categorie: "Autres",
+      ville: "Casablanca",
+      negociable: "non-negociable",
+      description: "Machine à laver automatique REGAL 9kg top métal très économique et solide."
+    },
+    {
+      nom: "Bureau",
+      images: [
+        "images/bur01.jpg",
+        "images/bur02.jpg",
+        "images/bur03.jpg"
+      ],
+      prix: "600 MAD",
+      tel: "+212631750900",
+      whatsapp: "+212631750900",
+      categorie: "Meubles",
+      ville: "Marrakech",
+      negociable: "negociable",
+      description: "Bureau MDF."
+    },
+    {
+      nom: "مكتب الأطفال",
+      images: [
+        "images/Table01.jpg",
+        "images/Table02.jpg"
+      ],
+      prix: "499 MAD",
+      tel: "+212771204179",
+      whatsapp: "+212771204179",
+      categorie: "Meubles",
+      ville: "Marrakech",
+      negociable: "non-negociable",
+      description: "90cm*80cm*20cm  MDF 18mm."
+    },
+    {
+      nom: "Table mdf",
+      images: [
+        "images/0056.jpg",
+        "images/0057.jpg",
+        "images/0058.jpg",
+        "images/0059.jpg"
+      ],
+      prix: "750 MAD",
+      tel: "+212631750900",
+      whatsapp: "+212631750900",
+      categorie: "Meubles",
+      ville: "Marrakech",
+      negociable: "negociable",
+      description: "Table basse mdf 1'10/70."
+    },
+    {
+      nom: "VTT Betwin",
+      images: [
+        "images/velo01.jpg",
+        "images/velo02.jpg",
+        "images/velo03.jpg",
+        "images/velo04.jpg",
+        "images/velo05.jpg"
+      ],
+      prix: "800 MAD",
+      tel: "+212666729053",
+      whatsapp: "+212666729053",
+      categorie: "Véhicules",
+      ville: "Marrakech",
+      negociable: "negociable",
+      description: "VTT Betwin à vendre Marrakech Mhamid."
+    },
+    {
+      nom: "TV LG 24 Pouce",
+      images: [
+        "images/lg001.jpg",
+        "images/lg002.jpg",
+        "images/lg003.jpg"
+      ],
+      prix: "650 MAD",
+      tel: "+212644601298",
+      whatsapp: "+212644601298",
+      categorie: "Électronique",
+      ville: "Marrakech",
+      negociable: "negociable",
+      description: "LG 24 pouce Europe full HD"
+    },
+    {
+      nom: "Bureau",
+      images: [
+        "images/001.jpeg",
+        "images/002.jpeg",
+        "images/003.jpeg"
+      ],
+      prix: "900 MAD",
+      tel: "+212614712321",
+      whatsapp: "+212614712321",
+      categorie: "Meubles",
+      ville: "Marrakech",
+      negociable: "non-negociable",
+      description: "مكتب نقي للبيع ثمن جد مناسب."
+    },
+    {
+      nom: "Vélo Betwin",
+      images: [
+        "images/btwin01.jpg",
+        "images/btwin02.jpg",
+        "images/btwin03.jpg",
+        "images/btwin04.jpg"
+      ],
+      prix: "900 MAD",
+      tel: "+212617406062",
+      whatsapp: "+212617406062",
+      categorie: "Véhicules",
+      ville: "Marrakech",
+      negociable: "negociable",
+      description: "بتوين نمرة 20 مليحة"
+    },
+    {
+      nom: "PC DELL i5",
+      images: [
+        "images/dell01.jpg",
+        "images/dell02.jpg",
+        "images/dell03.jpg",
+        "images/dell04.jpg",
+        "images/dell05.jpg"
+      ],
+      prix: "1550 MAD",
+      tel: "+212777660699",
+      whatsapp: "+212777660699",
+      categorie: "Électronique",
+      ville: "Marrakech",
+      negociable: "non-negociable",
+      description: "Pc i5 7éme batterie faible Tamnsourt."
+    },
+    {
+      nom: "Huile d'olive bio",
+      images: [
+        "images/huile01.jpg",
+        "images/huile02.jpg"
+      ],
+      prix: "80 MAD",
+      tel: "+212612345678",
+      whatsapp: "+212612345678",
+      categorie: "Produits alimentaire",
+      ville: "Fès",
+      negociable: "non-negociable",
+      description: "Huile d'olive extra vierge bio, pressée à froid, bouteille de 1L."
+    },
+    {
+      nom: "Miel naturel de montagne",
+      images: [
+        "images/miel01.jpg",
+        "images/miel02.jpg"
+      ],
+      prix: "120 MAD",
+      tel: "+212623456789",
+      whatsapp: "+212623456789",
+      categorie: "Produits alimentaire",
+      ville: "Autres",
+      negociable: "negociable",
+      description: "Miel pur de montagne, récolté artisanalement, pot de 500g."
+    }
+  ];
+
+  const container = document.getElementById("product-list");
+  let youtubeAPIReady = false;
+  const youtubePlayers = {};
+
+  // Fonction pour mélanger aléatoirement un tableau (algorithme de Fisher-Yates)
+  function shuffleArray(array) {
+    const newArray = [...array]; // Créer une copie pour ne pas modifier l'original
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  }
+
+  // Fonction pour obtenir des produits aléatoires
+  function getRandomProducts(products, count = null) {
+    const shuffled = shuffleArray(products);
+    if (count && count < shuffled.length) {
+      return shuffled.slice(0, count);
+    }
+    return shuffled;
+  }
+
+  function afficherProduits(filtres = {}) {
+    container.innerHTML = "";
+    
+    // Filtrer les produits selon les critères
+    const produitsFiltres = produits.filter(p => {
+      if (filtres.categorie && p.categorie !== filtres.categorie) return false;
+      if (filtres.ville && p.ville !== filtres.ville) return false;
+      if (filtres.negociable) {
+        if (filtres.negociable === "negociable" && p.negociable !== "negociable") return false;
+        if (filtres.negociable === "non-negociable" && p.negociable !== "non-negociable") return false;
+      }
+      return true;
+    });
+
+    // Mélanger aléatoirement les produits filtrés
+    const produitsMelanges = shuffleArray(produitsFiltres);
+
+    produitsMelanges.forEach(p => {
+      const message = encodeURIComponent(`Bonjour, je suis intéressé par votre article : ${p.nom} à ${p.prix}`);
+      const whatsappLink = `https://wa.me/${p.whatsapp}?text=${message}`;
+      const telLink = `tel:${p.tel}`;
+      
+      // Générer les images pour le carrousel
+      let carouselItems = '';
+      let carouselIndicators = '';
+      
+      p.images.forEach((img, index) => {
+        const activeClass = index === 0 ? 'active' : '';
+        carouselItems += `
+          <div class="carousel-item ${activeClass}">
+            <img src="${img}" class="d-block w-100" alt="${p.nom} - Photo ${index + 1}">
+          </div>
+        `;
+        
+        carouselIndicators += `
+          <button type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" 
+                  data-bs-slide-to="${index}" class="${activeClass}" 
+                  aria-label="Photo ${index + 1}"></button>
+        `;
+      });
+
+      // Badge négociable/non négociable
+      const badgeNegociable = p.negociable === "negociable" 
+        ? '<span class="badge-negociable"><i class="fas fa-handshake"></i> Négociable</span>' 
+        : '<span class="badge-non-negociable"><i class="fas fa-ban"></i> Non négociable</span>';
+
+      // Vérifier si le produit a une vidéo YouTube
+      const hasVideo = p.video !== undefined && p.video.includes('youtube.com');
+      
+      // Générer le contenu vidéo si disponible
+      let videoContent = '';
+      let videoTab = '';
+      let mediaTabs = '';
+      
+      if (hasVideo) {
+        // Extraire l'ID de la vidéo YouTube
+        let videoId = '';
+        if (p.video.includes('embed')) {
+          videoId = p.video.split('embed/')[1].split('?')[0];
+        } else if (p.video.includes('youtu.be')) {
+          videoId = p.video.split('youtu.be/')[1].split('?')[0];
+        } else {
+          videoId = p.video.split('v=')[1].split('&')[0];
+        }
+        const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1&mute=1`;
+        
+        videoContent = `
+          <div class="video-container">
+            <iframe src="${embedUrl}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    id="video-iframe-${p.nom.replace(/\s+/g, '-')}">
+            </iframe>
+            <div class="video-end-message" id="video-end-${p.nom.replace(/\s+/g, '-')}">
+              <h3>Merci d'avoir regardé cette vidéo</h3>
+              <p>Pour commander ce produit, contactez le vendeur via le bouton Appeler ou WhatsApp</p>
+              <button class="btn-replay" onclick="replayVideo('video-iframe-${p.nom.replace(/\s+/g, '-')}', 'video-end-${p.nom.replace(/\s+/g, '-')}')">
+                <i class="fas fa-redo"></i> Revoir la vidéo
+              </button>
+            </div>
+          </div>
+        `;
+        
+        // Onglets pour basculer entre images et vidéo
+        mediaTabs = `
+          <div class="media-tabs">
+            <div class="media-tab active" data-target="images-${p.nom.replace(/\s+/g, '-')}">
+              <i class="fas fa-images"></i> Photos
+            </div>
+            <div class="media-tab" data-target="video-${p.nom.replace(/\s+/g, '-')}">
+              <i class="fas fa-video"></i> Vidéo
+            </div>
+          </div>
+        `;
+        
+        videoTab = `
+          <div class="media-content" id="video-${p.nom.replace(/\s+/g, '-')}">
+            ${videoContent}
+          </div>
+        `;
+      }
+
+      container.innerHTML += `
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card shadow-sm">
+            ${hasVideo ? mediaTabs : ''}
             
-            const acceptButtonTexts = {
-                fr: "J'accepte",
-                ar: "أوافق",
-                en: "I accept"
-            };
+            <div class="media-content active" id="images-${p.nom.replace(/\s+/g, '-')}">
+              <div id="carousel-${p.nom.replace(/\s+/g, '-')}" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-indicators">
+                  ${carouselIndicators}
+                </div>
+                <div class="carousel-inner">
+                  ${carouselItems}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Précédent</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-${p.nom.replace(/\s+/g, '-')}" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Suivant</span>
+                </button>
+              </div>
+            </div>
             
-            languageButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    languageButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    Object.values(textElements).forEach(el => el.style.display = 'none');
-                    
-                    const lang = this.getAttribute('data-lang');
-                    textElements[lang].style.display = 'block';
-                    
-                    acceptButtonText.textContent = acceptButtonTexts[lang];
-                    
-                    // Reset scroll position when language changes
-                    document.querySelector('.conditions-container').scrollTop = 0;
-                    updateScrollButtons();
-                });
-            });
+            ${hasVideo ? videoTab : ''}
             
-            // Scroll functionality with buttons
-            const conditionsContainer = document.querySelector('.conditions-container');
-            const scrollUpBtn = document.getElementById('scroll-up');
-            const scrollDownBtn = document.getElementById('scroll-down');
-            const scrollStep = 100;
-            
-            function updateScrollButtons() {
-                const { scrollTop, scrollHeight, clientHeight } = conditionsContainer;
-                
-                scrollUpBtn.disabled = scrollTop === 0;
-                scrollDownBtn.disabled = scrollTop >= scrollHeight - clientHeight - 1;
+            <div class="card-body">
+              <h5 class="card-title">${p.nom}</h5>
+              <p class="card-text"><strong>Prix:</strong> ${p.prix} ${badgeNegociable}</p>
+              <div class="card-description">${p.description}</div>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="badge-ville"><i class="fas fa-map-marker-alt"></i> ${p.ville}</span>
+                <span class="badge-categorie">${p.categorie}</span>
+              </div>
+              <div class="d-flex justify-content-end mb-2 mt-auto">
+                <a href="${telLink}" class="btn btn-outline-success me-2 btn-call" title="Appeler le vendeur">
+                  <i class="fas fa-phone"></i> Appeler
+                </a>
+                <a href="${whatsappLink}" target="_blank" class="btn btn-success btn-whatsapp" title="Contacter sur WhatsApp">
+                  <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    
+    // Ajouter les événements pour les clics sur les images
+    document.querySelectorAll('.carousel-item img').forEach(img => {
+      img.addEventListener('click', function() {
+        const modal = document.getElementById("imageModal");
+        const imgModal = document.getElementById("expandedImage");
+        imgModal.src = this.src;
+        modal.style.display = "flex";
+      });
+    });
+    
+    // Gestion des onglets médias
+    document.querySelectorAll('.media-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-target');
+        const parentCard = this.closest('.card');
+        
+        // Désactiver tous les onglets et contenus
+        parentCard.querySelectorAll('.media-tab').forEach(t => t.classList.remove('active'));
+        parentCard.querySelectorAll('.media-content').forEach(c => c.classList.remove('active'));
+        
+        // Activer l'onglet et le contenu sélectionné
+        this.classList.add('active');
+        parentCard.querySelector(`#${targetId}`).classList.add('active');
+        
+        // Si c'est une vidéo, initialiser le lecteur YouTube
+        if (targetId.startsWith('video-')) {
+          const videoIframe = parentCard.querySelector('iframe');
+          if (videoIframe && youtubeAPIReady) {
+            initYouTubePlayer(videoIframe);
+          }
+        }
+      });
+    });
+    
+    // Initialiser les lecteurs YouTube si l'API est déjà chargée
+    if (youtubeAPIReady) {
+      initAllYouTubePlayers();
+    }
+  }
+
+  // Initialiser un lecteur YouTube individuel
+  function initYouTubePlayer(iframe) {
+    const playerId = iframe.id;
+    if (!youtubePlayers[playerId]) {
+      youtubePlayers[playerId] = new YT.Player(playerId, {
+        events: {
+          'onReady': (event) => {
+            // Activer le son si possible
+            try {
+              event.target.unMute();
+              event.target.setVolume(50); // Volume à 50%
+            } catch (e) {
+              console.log("Impossible de modifier le volume", e);
             }
-            
-            scrollUpBtn.addEventListener('click', function() {
-                conditionsContainer.scrollBy({
-                    top: -scrollStep,
-                    behavior: 'smooth'
-                });
-                
-                // Désactiver temporairement le bouton pendant l'animation
-                this.disabled = true;
-                setTimeout(updateScrollButtons, 300);
-            });
-            
-            scrollDownBtn.addEventListener('click', function() {
-                conditionsContainer.scrollBy({
-                    top: scrollStep,
-                    behavior: 'smooth'
-                });
-                
-                // Désactiver temporairement le bouton pendant l'animation
-                this.disabled = true;
-                setTimeout(updateScrollButtons, 300);
-            });
-            
-            conditionsContainer.addEventListener('scroll', updateScrollButtons);
-            
-            // Initialize scroll buttons state
-            updateScrollButtons();
-        });
-    </script>
+          },
+          'onStateChange': (event) => {
+            if (event.data === YT.PlayerState.ENDED) {
+              const parentCard = iframe.closest('.card');
+              const videoEndMessage = parentCard.querySelector('.video-end-message');
+              if (videoEndMessage) {
+                videoEndMessage.style.display = 'flex';
+              }
+            }
+          }
+        }
+      });
+    }
+  }
+
+  // Initialiser tous les lecteurs YouTube visibles
+  function initAllYouTubePlayers() {
+    document.querySelectorAll('.media-content.active iframe').forEach(iframe => {
+      if (iframe.src.includes('youtube.com')) {
+        initYouTubePlayer(iframe);
+      }
+    });
+  }
+
+  // Fonction pour rejouer la vidéo
+  window.replayVideo = function(iframeId, messageId) {
+    const iframe = document.getElementById(iframeId);
+    const message = document.getElementById(messageId);
+    
+    if (iframe && message) {
+      // Pour YouTube, nous utilisons l'API
+      if (youtubePlayers[iframeId]) {
+        youtubePlayers[iframeId].seekTo(0);
+        youtubePlayers[iframeId].playVideo();
+        youtubePlayers[iframeId].unMute(); // Activer le son lors du replay
+      } else {
+        // Solution de repli si l'API n'est pas chargée
+        const src = iframe.src.split('?')[0]; // Supprimer les paramètres existants
+        iframe.src = src + '?enablejsapi=1&rel=0&modestbranding=1&autoplay=1&mute=0';
+      }
+      
+      // Masquer le message
+      message.style.display = 'none';
+    }
+  };
+
+  // Fonction pour afficher les alertes
+  function showAlert(message) {
+    const alertModal = document.getElementById('alertModal');
+    const alertMessage = document.getElementById('alertMessage');
+    
+    alertMessage.textContent = message;
+    alertModal.classList.add('show');
+    
+    // Masquer automatiquement après 5 secondes
+    setTimeout(() => {
+      hideAlert();
+    }, 5000);
+  }
+
+  function hideAlert() {
+    const alertModal = document.getElementById('alertModal');
+    alertModal.classList.remove('show');
+  }
+
+  // Charger l'API YouTube
+  function loadYouTubeAPI() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
+
+  // Fonction appelée par l'API YouTube quand elle est prête
+  window.onYouTubeIframeAPIReady = function() {
+    youtubeAPIReady = true;
+    initAllYouTubePlayers();
+  };
+
+  // Afficher tous les produits aléatoirement au chargement
+  afficherProduits();
+  loadYouTubeAPI();
+
+  // Recherche dynamique
+  document.getElementById("recherche").addEventListener("input", function () {
+    const valeur = this.value.toLowerCase();
+    const cartes = document.querySelectorAll("#product-list .card");
+
+    cartes.forEach(carte => {
+      const texte = carte.innerText.toLowerCase();
+      carte.parentElement.style.display = texte.includes(valeur) ? "block" : "none";
+    });
+  });
+
+  // Gestion des filtres
+  document.getElementById("appliquerFiltres").addEventListener("click", function() {
+    const categorie = document.getElementById("filtreCategorie").value;
+    const ville = document.getElementById("filtreVille").value;
+    const negociable = document.getElementById("filtreNegociable").value;
+    
+    const filtres = {};
+    if (categorie) filtres.categorie = categorie;
+    if (ville) filtres.ville = ville;
+    if (negociable) filtres.negociable = negociable;
+    
+    afficherProduits(filtres);
+    
+    // Fermer la modale
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalFiltre'));
+    modal.hide();
+
+    // Afficher une alerte
+    showAlert('Filtres appliqués avec succès');
+  });
+
+  // Réinitialiser les filtres
+  document.getElementById("resetFiltres").addEventListener("click", function() {
+    document.getElementById("filtreCategorie").value = "";
+    document.getElementById("filtreVille").value = "";
+    document.getElementById("filtreNegociable").value = "";
+    afficherProduits();
+    
+    // Afficher une alerte
+    showAlert('Filtres réinitialisés');
+  });
+
+  // Envoi du formulaire produit
+  document.getElementById("formProduit").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nom = document.getElementById('nomProduit').value;
+    const prix = document.getElementById('prixProduit').value;
+    const tel = document.getElementById('telProduit').value;
+    const ville = document.getElementById('villeProduit').value;
+    const categorie = document.getElementById('categorieProduit').value;
+    const negociable = document.querySelector('input[name="negociable"]:checked').value;
+    const video = document.getElementById('videoProduit').value;
+
+    // Vérification des champs obligatoires
+    if (!nom || !prix || !tel || !ville || !categorie) {
+      showAlert('Veuillez remplir tous les champs obligatoires (*)');
+      return; // Empêche l'envoi du formulaire
+    }
+
+    const desc = document.getElementById('descProduit').value;
+    const img = document.getElementById('imgProduit').value;
+
+    const message = `Salam, voici une annonce à publier sur le site :%0A
+*Nom:* ${nom}%0A
+*Prix:* ${prix} MAD%0A
+*Négociation:* ${negociable === "negociable" ? "Prix négociable" : "Prix ferme (non négociable)"}%0A
+*Tél vendeur:* +212${tel}%0A
+*Ville:* ${ville}%0A
+*Description:* ${desc || '---'}%0A
+*Photo:* ${img || 'à envoyer séparément'}%0A
+*Vidéo YouTube:* ${video || '---'}%0A
+*Catégorie:* ${categorie}`;
+
+    const whatsappAdmin = '212608975435';
+    const lien = `https://wa.me/${whatsappAdmin}?text=${message}`;
+
+    // Ouvrir le lien WhatsApp
+    window.open(lien, '_blank');
+
+    // Réinitialiser les champs du formulaire
+    document.getElementById('formProduit').reset();
+
+    // Fermer la modale
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalProduit'));
+    modal.hide();
+
+    // Afficher une alerte
+    showAlert('Votre annonce a été envoyée avec succès');
+  });
+
+  // Gestion des clics sur les images des produits
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('carousel-item') || 
+        e.target.classList.contains('carousel-inner') || 
+        e.target.classList.contains('carousel-item') || 
+        e.target.classList.contains('d-block') || 
+        e.target.classList.contains('w-100')) {
+      const modal = document.getElementById("imageModal");
+      const img = document.getElementById("expandedImage");
+      img.src = e.target.src || e.target.querySelector('img').src;
+      modal.style.display = "flex";
+    }
+    
+    // Fermer quand on clique sur le bouton
+    if (e.target.classList.contains('close-image')) {
+      document.getElementById("imageModal").style.display = "none";
+    }
+  });
+
+  // Fermer aussi quand on clique en dehors de l'image
+  window.addEventListener('click', function(e) {
+    if (e.target === document.getElementById("imageModal")) {
+      document.getElementById("imageModal").style.display = "none";
+    }
+  });
+  
+  // Gestion des icônes flottantes
+  document.querySelector('.floating-icon.top').addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
